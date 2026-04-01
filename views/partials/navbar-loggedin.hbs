@@ -1,0 +1,36 @@
+<header>
+    <nav class="nav-bar">
+        <a href="/" class="nav-logo">
+            <img src="/images/webLogo.png" alt="Logo" class="logo-img">
+            <h2 class="logo-text">Eatstagram</h2>
+        </a>
+
+        <ul class="nav-links">
+            <a href="/">HOME</a>
+
+            <li class="dropdown">
+                <a href="#">RESTAURANTS</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/restaurants">View Restaurants</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#">REVIEWS</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/reviews/search-reviews">Search Reviews</a></li>
+                    <li><a href="/reviews/my">My Reviews</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown-pfp">
+                <img src="{{navbarUser.image}}" alt="Profile">
+                <ul class="dropdown-menu">
+                    <li><a href="/users/profile">View Profile</a></li>
+                    <li><a href="/users/edit-profile">Edit Profile</a></li>
+                    <li><a href="/users/logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
