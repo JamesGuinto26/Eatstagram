@@ -1,0 +1,117 @@
+<main class = "view-container">
+
+```
+<div class = "top-section">
+    <div class = "top-container">
+        <div class = "search-container">
+            <form action = "/reviews/search-reviews" method = "GET">
+
+                <button type = "submit" class = "search-btn">Search</button>
+
+                <input type = "text" name = "query" placeholder = "Search reviews..." class = "search-bar" value = "{{query}}">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class = "after-hr">
+
+    {{#if reviews.length}}
+
+    <div class="review-grid">
+
+        {{#each reviews}}
+            <div class = "review-card">
+
+                <div class = "review-top">
+
+                    <div class = "review-user">
+                        <img src = "{{#if this.userId.image}}{{this.userId.image}}{{else}}/images/profile.png{{/if}}" class = "review-avatar">
+
+                        <div class = "review-user-info">
+
+                            <h4 class = "review-username">
+                                <a href = "{{#if (eq ../currentUserId this.userId._id)}}/users/profile{{else}}/users/profile/{{this.userId._id}}{{/if}}">{{this.userId.username}}</a>
+                            </h4>
+
+                            <div class="review-meta">
+                                <span class = "review-date">
+                                    {{formatDate this.reviewDate}} at {{formatTime this.reviewDate}}
+                                    {{#if this.editedAt}}
+                                        <span class="edited-label">(edited)</span>
+                                    {{/if}}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class = "review-restaurant">
+                    Reviewed at 
+                    <a href = "/restaurants/{{this.restaurantId._id}}">
+                        <strong>{{this.restaurantId.name}}</strong>
+                    </a>
+                </p>
+
+                <span class = "stars">{{{stars this.rating}}}</span>
+
+                <h3 class = "review-title">{{this.title}}</h3>
+
+                <p class = "review-comment">{{this.comment}}</p>
+
+                {{#if this.media.length}}
+                    <div class = "review-media">
+                        {{#each this.media}}
+                            {{#if (eq this.mediaType "image")}}
+                                <img src = "{{this.url}}" class="review-media-img">
+                            {{else}}
+                                <video controls class = "review-media-video">
+                                    <source src = "{{this.url}}">
+                                </video>
+                            {{/if}}
+                        {{/each}}
+                    </div>
+                {{/if}}
+
+                <div class = "review-footer">
+
+                    <div class = "review-actions-bottom">
+
+                        <form action = "/reviews/{{this._id}}/helpful?from=search" method = "POST">
+                            <button type = "submit" class = "helpful-btn {{#if this.isHelpful}}active{{/if}}">
+                                👍 Helpful ({{this.helpfulCount}})
+                            </button>
+                        </form>
+
+                        <form action = "/reviews/{{this._id}}/unhelpful?from=search" method = "POST">
+                            <button type = "submit" class = "unhelpful-btn {{#if this.isUnhelpful}}active{{/if}}">
+                                👎 Unhelpful ({{this.unhelpfulCount}})
+                            </button>
+                        </form>
+
+                    </div>
+
+                    <a href = "/reviews/{{this._id}}/comments" class = "check-comments-btn">Check Comments</a>
+
+                </div>
+
+            </div>
+        {{/each}}
+
+    </div>
+
+    {{else}}
+
+        <div class = "no-results">
+            <p>Sorry! There are no results to show.</p>
+        </div>
+
+    {{/if}}
+
+</div>
+```
+
+</main>

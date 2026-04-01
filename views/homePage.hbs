@@ -1,0 +1,59 @@
+<div class="home-banner">
+    <div class="home-overlay">
+        <h1>Discover restaurants near you</h1>
+        <p>Share reviews and find new restaurants for you</p>
+        <a href = "/restaurants" class="discover-btn">Add Your Reviews</a> <!-- Change route when review is finished -->
+    </div>
+</div>
+
+<div class="featured-header">
+    <h2>Featured Restaurants</h2>
+        <a href = "/restaurants" class="see-all">Check All Restaurants</a>
+</div>
+
+<div class="featured-slider">
+    <div class="slides">
+
+    {{#each featuredRestaurants}}
+        <div class="resto-card">
+            <img src="/images/{{this.image}}" alt="{{this.name}}">  
+            
+            <div class="resto-info">
+                <h3>{{this.name}}</h3>
+                <p>{{{stars this.rating}}} - {{this.description}}</p>
+            </div>
+        </div>
+    {{/each}}
+
+    </div>
+
+    <button class="prev-btn">&#10094;</button>
+    <button class="next-btn">&#10095;</button>
+</div>
+
+<script src = "/js/slider.js"></script>
+
+
+<div class="about-section">
+    <div class="about-container">
+        
+        <div class="about-image">
+            <img src="/images/placeholder.jpeg" alt="About EATSTAGRAM">
+        </div>
+
+        <div class="about-text">
+            <h2>About Us</h2>
+            <p>
+                EATSTAGRAM is your go-to platform for discovering amazing restaurants
+                near you. We connect food lovers with the best dining experiences by
+                providing honest reviews, ratings, and recommendations.
+            </p>
+            <p>
+                Whether you're searching for hidden gems or trending hotspots,
+                we help you find your next favorite meal.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Implement limit 6 in routes to display 6 restos only !-->

@@ -1,0 +1,39 @@
+<section class = "edit-profile">
+    <form class = "edit-card" action = "/users/edit-profile" method = "POST" enctype = "multipart/form-data">
+        <h2>Edit User Profile</h2>
+
+        <label for = "username">Username</label>
+        <input type = "text" id = "username" name = "username" placeholder = "Enter new username" value = "{{currentUser.username}}" required>
+
+        <label for = "email">Email</label>
+        <input type = "email" id = "email" name = "email" placeholder = "Enter your email" value = "{{currentUser.email}}" required>
+
+        <label for = "phoneNum">Phone Number</label>
+        <input type = "tel" id = "phoneNum" name = "phoneNum" placeholder = "Enter your phone number" value = "{{currentUser.phoneNum}}">
+
+
+        <div class = "avatar-section">
+            <br>
+            <label class = "avatar-label">Profile Avatar</label>
+            <div class = "avatar-container">
+                <div class = "avatar-preview">
+                    <img src = "{{currentUser.image}}" alt = "Current Avatar">
+                </div>
+                <div class = "avatar-upload">
+                    <input type = "file" name = "avatar" accept = "image/*">
+                    <p class="avatar-note">Upload a new profile picture</p>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <label for = "description">Short Description</label>
+        <textarea id = "description" name = "description" placeholder = "Write something about yourself...">{{currentUser.description}}</textarea>
+
+        <div class = "btn-container">
+            <button type = "submit" class = "btn-main">Save</button>
+            <a href = "/users/profile" class = "btn-main cancel-btn">Cancel</a>
+        </div>
+    </form>
+</section>

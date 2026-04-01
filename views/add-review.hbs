@@ -1,0 +1,52 @@
+
+<main class="add-review-page">
+
+    <div class="review-box">
+
+        <div class="review-card-layout">
+
+            <div class="resto-image-side">
+                <img src="/images/{{restaurant.image}}" alt="{{restaurant.name}}">
+            </div>
+
+            <div class="review-form-side">
+
+                <h2>Review for {{restaurant.name}}</h2>
+
+                <form action="/reviews/add/{{restaurant._id}}" method="POST" enctype="multipart/form-data">
+
+                    <label>Title</label>
+                    <input type="text" name="title" required>
+
+                    <label>Rating</label>
+                    <select name="rating" required>
+                        <option value="">Select rating</option>
+                        <option value="5">★★★★★ (5)</option>
+                        <option value="4">★★★★ (4)</option>
+                        <option value="3">★★★ (3)</option>
+                        <option value="2">★★ (2)</option>
+                        <option value="1">★ (1)</option>
+                    </select>
+
+                    <label>Review</label>
+                    <textarea name="comment" rows="5" class="comment"></textarea>
+
+                    <div class="file-upload-wrapper">
+                        <label for="mediaUpload" class="custom-file-btn">Upload Files (Max 3)</label>
+                        <input type="file" name="media" id="mediaUpload" multiple accept="image/*,video/*">
+                        <span id="file-names"></span>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Review</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script src="/js/edit-profile.js"></script>

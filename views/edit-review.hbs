@@ -1,0 +1,75 @@
+<main class="add-review-page">
+
+    <div class="review-box">
+
+        <div class="review-card-layout">
+
+            <div class="resto-image-side">
+                <img src="/images/{{restaurant.image}}" alt="{{restaurant.name}}">
+            </div>
+
+            <div class="review-form-side">
+
+                <h2>Edit Review for {{restaurant.name}}</h2>
+
+                {{#if errors}}
+                    <div style="color:#ffdddd; margin-bottom:15px;">
+                        {{#each errors}}
+                            <p>{{this}}</p>
+                        {{/each}}
+                    </div>
+                {{/if}}
+
+                <form action="/reviews/edit/{{review._id}}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="from" value="{{from}}">
+
+                    <label>Title</label>
+                    <input type="text" name="title" value="{{review.title}}" required>
+
+                    <label>Rating</label>
+                    <select name="rating" required>
+                        <option value="">Select rating</option>
+                        <option value="5" {{#if (eq review.rating 5)}}selected{{/if}}>★★★★★ (5)</option>
+                        <option value="4" {{#if (eq review.rating 4)}}selected{{/if}}>★★★★ (4)</option>
+                        <option value="3" {{#if (eq review.rating 3)}}selected{{/if}}>★★★ (3)</option>
+                        <option value="2" {{#if (eq review.rating 2)}}selected{{/if}}>★★ (2)</option>
+                        <option value="1" {{#if (eq review.rating 1)}}selected{{/if}}>★ (1)</option>
+                    </select>
+
+                    <label>Review</label>
+                    <textarea name="comment" rows="5">{{review.comment}}</textarea>
+
+                    {{#if review.media.length}}
+                        <label>Current Media (Will Be Replaced)</label>
+                        <div style="margin-bottom:15px; display:flex; flex-wrap:wrap; gap:8px;">
+                            {{#each review.media}}
+                                {{#if (eq this.mediaType "image")}}
+                                    <img src="{{this.url}}" width="100" style="border-radius:6px;">
+                                {{else}}
+                                    <video width="100" controls style="border-radius:6px;">
+                                        <source src="{{this.url}}">
+                                    </video>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    {{/if}}
+
+                    <div class="file-upload-wrapper">
+                        <label for="mediaUpload" class="custom-file-btn">Upload Files (Max 3)</label>
+                        <input type="file" name="media" id="mediaUpload" multiple accept="image/*,video/*">
+                        <span id="file-names"></span>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Update Review</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script src="/js/edit-profile.js"></script>

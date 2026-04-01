@@ -1,0 +1,73 @@
+<main class="resto-container">
+    <div class="review-card review-specific">
+        <div class="review-top">
+            <div class="review-user">
+                <img src="{{#if review.userId.image}}{{review.userId.image}}{{else}}/images/profile.png{{/if}}" class="review-avatar">
+
+                <div class="review-user-info">
+                    <h4 class="review-username">{{review.userId.username}}</h4>
+
+                    <div class="review-meta">
+                        <span class="stars">{{{stars review.rating}}}</span>
+                        <span class="review-date">
+                            {{formatDate review.reviewDate}} at {{formatTime review.reviewDate}}
+                            {{#if review.editedAt}}
+                                <span class="edited-label">(edited)</span>
+                            {{/if}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="review-title">{{review.title}}</h3>
+        <p class="review-comment">{{review.comment}}</p>
+
+        {{#if review.media.length}}
+        <div class="review-media">
+            {{#each review.media}}
+                {{#if (eq this.mediaType "image")}}
+                    <img src="{{this.url}}" class="review-media-img">
+                {{else}}
+                    <video controls class="review-media-video">
+                        <source src="{{this.url}}">
+                    </video>
+                {{/if}}
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <div class="review-footer">
+            <span class="helpful">👍 {{review.helpfulCount}} users found this helpful</span>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h3>Comments</h3><br>
+
+        {{#if comments.length}}
+            {{#each comments}}
+                <div class="comment-card">
+                    <div class="comment-user">
+                        <img src="{{#if this.userId.image}}{{this.userId.image}}{{else}}/images/profile.png{{/if}}" class="comment-avatar">
+                        <span class="comment-username">{{this.userId.username}} <i>(admin)</i></span>
+                        <span class="comment-date">{{formatDate this.commentDate}} at {{formatTime this.commentDate}}</span>
+                    </div>
+                    <p class="comment-text">{{this.text}}</p>
+                </div>
+            {{/each}}
+        {{else}}
+            <p class="no-comments">There are no comments yet.</p>
+        {{/if}}
+
+       
+        {{#if isManager}}
+        <form action="/reviews/{{review._id}}/comments" method="POST" class="add-comment-form">
+            <input type="text" name="comment" placeholder="Leave a comment..." required>
+            <button type="submit">Post</button>
+        </form>
+        {{/if}}
+        
+    </div>
+
+</main>

@@ -1,0 +1,97 @@
+<main class = "resto-container">
+
+<div class = "after-hr">
+
+    <div class = "reviews-header">
+        <h2>My Reviews</h2>
+    </div>
+
+    <!-- Check if user has reviews -->
+    {{#if reviews.length}}
+        {{#each reviews}}
+            <div class = "review-card" id = "review-{{this._id}}">
+
+                <div class = "review-top">
+
+                    <div class = "review-user">
+                        <img src = "{{#if this.userId.image}}{{this.userId.image}}{{else}}/images/profile.png{{/if}}" class = "review-avatar">
+
+                        <div class = "review-user-info">
+
+                            <p class="reviewed-resto">
+                                Reviewed at 
+                                <a href="/restaurants/{{this.restaurantId._id}}">{{this.restaurantId.name}}</a>
+                            </p>
+    
+                            </h4>
+
+                            <div class = "review-info"> <!-- changed -->
+                                <span class = "stars">{{{stars this.rating}}}</span>
+
+                                <span class = "review-date">{{formatDate this.reviewDate}} at {{formatTime this.reviewDate}}
+                                    {{#if this.editedAt}}
+                                        <span class = "edited-label">(edited)</span>
+                                    {{/if}}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class = "review-actions">
+                        <a href = "/reviews/edit/{{this._id}}?from=my" class = "edit-btn">Edit</a>
+                        <a href = "/reviews/delete/{{this._id}}?from=my" class = "delete-btn" onclick = "return confirm('Are you sure you want to delete this review?');">Delete</a>
+                    </div>
+
+                </div>
+
+                <h3 class = "review-title">{{this.title}}</h3>
+
+                <p class = "review-comment">{{this.comment}}</p>
+
+                {{#if this.media.length}}
+                    <div class = "review-media">
+                        {{#each this.media}}
+                            {{#if (eq this.mediaType "image")}}
+                                <img src = "{{this.url}}" class = "review-media-img">
+                            {{else}}
+                                <video controls class = "review-media-video">
+                                    <source src = "{{this.url}}">
+                                </video>
+                            {{/if}}
+                        {{/each}}
+                    </div>
+                {{/if}}
+
+                <div class = "review-footer">
+
+                    <div class = "review-actions-bottom">
+
+                        <form action = "/reviews/{{this._id}}/helpful?from=my" method = "POST">
+                            <button type = "submit" class = "helpful-btn {{#if this.isHelpful}}active{{/if}}">
+                                👍 Helpful ({{this.helpfulCount}})
+                            </button>
+                        </form>
+
+                        <form action = "/reviews/{{this._id}}/unhelpful?from=my" method = "POST">
+                            <button type = "submit" class = "unhelpful-btn {{#if this.isUnhelpful}}active{{/if}}">
+                                👎 Unhelpful ({{this.unhelpfulCount}})
+                            </button>
+                        </form>
+
+                    </div>
+
+                    <a href = "/reviews/{{this._id}}/comments" class = "check-comments-btn">Check Comments</a>
+
+                </div>
+
+            </div>
+        {{/each}}
+
+    {{else}}
+        <p class = "no-reviews">You haven't written any reviews yet.</p>
+    {{/if}}
+
+</div>
+
+</main>

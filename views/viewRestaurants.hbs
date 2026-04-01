@@ -1,0 +1,49 @@
+<main class="view-container">
+
+    <div class="top-section">
+        <div class="top-container">
+
+            <div class="search-container">
+                <form action="/restaurants/search" method="GET">
+
+                    <button type="submit" class="search-btn">Search</button>
+
+                    <div class="filter-container">
+                        <select name="rating" id="ratingFilter" class="rating-dropdown">
+                            <option value="">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+
+                    <input type="text" name="q" placeholder="Search restaurants..." class="search-bar" value="{{searchQuery}}">
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="restaurant-grid">
+        {{#if restaurants.length}}
+            {{#each restaurants}}
+                <div class="restaurant-card">
+                    <img src="/images/{{this.image}}" alt="{{this.name}}">
+                    <h2 class="review-stars">{{{stars this.rating}}}</h2>
+                    <h3>{{this.name}}</h3>
+                    <a href="/restaurants/{{this._id}}"> 
+                        <button class="view-btn">View Reviews</button>
+                    </a>
+                </div>
+            {{/each}}
+        {{else}}
+            <div class="no-results">
+                <p>Sorry! There are no results to show.</p>
+            </div>
+        {{/if}}
+    </div>
+
+</main>
