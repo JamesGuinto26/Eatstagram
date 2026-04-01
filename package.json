@@ -1,0 +1,21 @@
+{
+  "name": "new_apdev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "express-fileupload": "^1.5.2",
+    "express-handlebars": "^8.0.6",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.2.3"
+  }
+}
