@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    background: url("/images/resto.webp") no-repeat center center/cover;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: inherit;
+    filter: blur(12px);
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.25);
+    background-blend-mode: darken;
+    z-index: -1;
+}
+
+.comments-container {
+    width: 70%;
+    max-width: 900px;
+    margin: 120px auto 60px auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    background: white;
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.comments-header h2 {
+    font-size: 30px;
+    color: rgb(88, 67, 47);
+}
+
+.comments-content {
+    background: white;
+    padding: 35px;
+}
+
+.comment-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    padding: 20px 25px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.comment-date {
+    font-size: 13px;
+    color: #777;
+}
+
+.comment-text {
+    font-size: 15px;
+    color: #3D211A;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.comment-review-ref {
+    font-size: 14px;
+    color: rgb(88, 67, 47);
+    margin-bottom: 12px;
+}
+
+.comment-review-ref strong {
+    color: rgb(88, 67, 47);
+}
+
+.comment-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.check-post-btn {
+    text-decoration: none;
+    color: #3D211A;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.check-post-btn:hover {
+    color: rgb(148,127,100);
+    text-decoration: underline;
+}
+
+.no-comments {
+    text-align: center;
+    color: gray;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .comments-container {
+        width: 90%;
+    }
+
+    .comment-text {
+        font-size: 14px;
+    }
+}
+
+.comment-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.comment-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgb(88, 67, 47);
+}
+
+.comment-user-info h4 {
+    margin-bottom: 4px;
+    font-size: 16px;
+    color: rgb(88, 67, 47);
+}
