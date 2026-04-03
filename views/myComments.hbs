@@ -1,0 +1,48 @@
+<main class = "comments-container">
+
+<div class = "comments-content">
+
+<div class = "comments-header">
+    <h2>My Comments</h2>
+</div>
+
+{{#if comments.length}}
+    {{#each comments}}
+
+    <div class = "comment-card">
+        <div class = "comment-top">
+
+            <div class = "comment-user"> 
+
+                <img src = "{{#if this.userId.image}}{{this.userId.image}}{{else}}/images/profile.png{{/if}}" class = "comment-avatar">
+
+                <div class = "comment-user-info">
+                    <h4 class="comment-username">{{this.userId.username}}</h4>
+
+                    <span class="comment-date">{{formatDate this.commentDate}} at {{formatTime this.commentDate}}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <p class="comment-text">{{this.text}}</p>
+
+        <p class = "comment-review-ref">Commented on review: <strong>{{this.reviewId.title}}</strong> ({{this.reviewId.restaurantId.name}})</p>
+
+        <div class = "comment-footer">
+            <a href = "/reviews/{{this.reviewId._id}}/comments#comment-{{this._id}}" class = "check-post-btn">Check Whole Post</a>
+        </div>
+
+    </div>
+
+    {{/each}}
+{{else}}
+
+<p class = "no-comments">You haven't written any comments yet.</p>
+
+{{/if}}
+
+</div>
+
+</main>
