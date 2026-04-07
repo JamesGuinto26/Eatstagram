@@ -4,6 +4,8 @@ const User = require('../schemas/User');
 const Review = require('../schemas/Review');
 const bcrypt = require('bcrypt');
 const fileUpload = require('express-fileupload');
+const fs = require('fs');
+const path = require('path');
 
 // for login route
 router.get('/login', (req, res) => {
@@ -109,10 +111,26 @@ router.post('/signup', async (req, res) => {
             });
         }
 
+        /*
         if (avatarPicture) {
             const uploadPath = `/public/uploads/${Date.now()}_${avatarPicture.name}`;
             avatarDefault = `/uploads/${Date.now()}_${avatarPicture.name}`;
             await avatarPicture.mv('.' + uploadPath);
+        }
+        */
+        if (avatarPicture) {
+            const uploadDir = path.join(__dirname, '../public/uploads');
+
+            if (!fs.existsSync(uploadDir)) {
+                fs.mkdirSync(uploadDir, { recursive: true });
+            }
+
+            const fileName = `${Date.now()}_${avatarPicture.name}`;
+            const uploadPath = path.join(uploadDir, fileName);
+
+            await avatarPicture.mv(uploadPath);
+
+            avatarDefault = `/uploads/${fileName}`;
         }
 
         if (!req.body.terms) {
