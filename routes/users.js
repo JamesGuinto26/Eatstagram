@@ -84,8 +84,12 @@ router.get('/signup', (req, res) => {
 router.post('/signup', async (req, res) => {
     try {
         const { username, email, phoneNum, password, confirmPassword, description } = req.body;
-        //let avatarPicture = req.files?.avatar; commented out for demo purposes
         let avatarPicture = null;
+
+        if (req.files && req.files.avatar) {
+            avatarPicture = req.files.avatar;
+        }    
+        
         let avatarDefault = '/images/profile.png';
 
         if (password !== confirmPassword) {
@@ -112,34 +116,17 @@ router.post('/signup', async (req, res) => {
             });
         }
 
-        /*
         if (avatarPicture) {
             const uploadPath = `/public/uploads/${Date.now()}_${avatarPicture.name}`;
             avatarDefault = `/uploads/${Date.now()}_${avatarPicture.name}`;
             await avatarPicture.mv('.' + uploadPath);
         }
-        */
-        /*
-        if (avatarPicture) {
-            const uploadDir = path.join(__dirname, '../public/uploads');
-
-            if (!fs.existsSync(uploadDir)) {
-                fs.mkdirSync(uploadDir, { recursive: true });
-            }
-
-            const fileName = `${Date.now()}_${avatarPicture.name}`;
-            const uploadPath = path.join(uploadDir, fileName);
-
-            await avatarPicture.mv(uploadPath);
-
-            avatarDefault = `/uploads/${fileName}`;
-        }
-        */ 
-        // disable for now for demo
-
-        if (!req.body.terms) {
-            return res.render('signup', { 
-                error: 'You must agree to the Terms of Service and Privacy Policy', title: 'Sign Up' 
+        
+        if (req.body.terms !== "on") {
+            return res.render('signup', {
+            error: 'You must agree to the Terms of Service and Privacy Policy',
+            title: 'Sign Up',
+            extraCSS: 'signup.css'
             });
         }
 
@@ -164,17 +151,15 @@ router.post('/signup', async (req, res) => {
         res.redirect('/');
 
     } catch (err) {
-        console.error("SIGNUP ERROR:", err);
-        /*
+        console.error(err);
         res.render('signup', {
-            error: 'Something went wrong. Please try again.',
-            title: 'Sign Up',
-            extraCSS: 'signup.css'
+        error: 'Something went wrong, please try again',
+        title: 'Sign Up',
+        extraCSS: 'signup.css'
         });
-        */
-        res.status(500).send(err.stack);
     }
 });
+
 
 // for viewing user profile (own profile)
 router.get('/profile', async (req, res) => {
