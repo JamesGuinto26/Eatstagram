@@ -53,6 +53,7 @@ app.set('views', path.join(__dirname, 'views')); // where layouts are located
 
 // Middlewares
 app.use(express.static(path.join(__dirname, 'public'))); // for public folder access (css, js)
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use(express.urlencoded({ extended: true })); // for reading html forms
 app.use(express.json());
 
