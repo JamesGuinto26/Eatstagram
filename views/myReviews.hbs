@@ -63,13 +63,13 @@
 
                 <div class="review-footer">
                     <div class="review-actions-bottom">
-                        <form action="/reviews/{{this._id}}/helpful?from=my" method="POST">
+                        <form action="/reviews/{{this._id}}/helpful?from={{#if showEdit}}my{{else}}user{{/if}}" method="POST">                            
                             <button type="submit" class="helpful-btn {{#if this.isHelpful}}active{{/if}}">
                                 👍 Helpful ({{this.helpfulCount}})
                             </button>
                         </form>
 
-                        <form action="/reviews/{{this._id}}/unhelpful?from=my" method="POST">
+                        <form action="/reviews/{{this._id}}/unhelpful?from={{#if showEdit}}my{{else}}user{{/if}}" method="POST">                            
                             <button type="submit" class="unhelpful-btn {{#if this.isUnhelpful}}active{{/if}}">
                                 👎 Unhelpful ({{this.unhelpfulCount}})
                             </button>
