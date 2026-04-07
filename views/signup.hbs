@@ -6,8 +6,8 @@
         {{#if error}}
             <p class="error">{{error}}</p>
         {{/if}}
-
-        <form action="/users/signup" method="POST" enctype="multipart/form-data">
+        <!-- removed enctype for now -->
+        <form action="/users/signup" method="POST">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" placeholder="Choose a username" required>
 
