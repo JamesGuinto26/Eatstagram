@@ -7,7 +7,7 @@
     </div>
 
     <!-- Check if user has reviews -->
-    {{#if reviews.length}}
+    {{#if userReviews.length}}
         {{#each reviews}}
             <div class="review-card" id="review-{{this._id}}">
 
@@ -35,7 +35,7 @@
 
                     <!-- Only show Edit/Delete if this is the logged-in user's own page -->
                     <div class="review-actions">
-                        {{#if showEdit}}
+                        {{#if ../showEdit}}
                             <a href="/reviews/edit/{{this._id}}?from=my" class="edit-btn">Edit</a>
                             <a href="/reviews/delete/{{this._id}}?from=my" class="delete-btn"
                                onclick="return confirm('Are you sure you want to delete this review?');">Delete</a>
