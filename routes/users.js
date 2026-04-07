@@ -225,13 +225,14 @@ router.get('/profile/:id', async (req, res) => {
 
         res.render('profilePage', {
             title: `${otherUser.username}'s Profile`,
-            currentUser: otherUser,
+            profileUser: otherUser,         
+            currentUser: req.session.user,   
             userReviews,
             isLoggedIn: true,
             isUserAdmin: req.session.isAdmin,
             extraCSS: 'profilePage.css',
-            showEdit: false,     
-            viewingOther: true,    
+            showEdit: false,
+            viewingOther: true,
             navbarUser: req.session.user
         });
 
