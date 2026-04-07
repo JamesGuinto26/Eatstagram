@@ -589,4 +589,29 @@ router.get('/my', async (req, res) => {
     }
 });
 
+// for check reviews of other users
+router.get('/user/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        const reviews = await Review.find({ userId })
+            .populate('restaurantId')
+            .populate('userId')
+            .sort({ reviewDate: -1 })
+            .lean();
+
+        res.render('myReviews', {  
+            title: "User Reviews",
+            reviews,
+            currentUserId: req.session.userId,
+            extraCSS: "myReviews.css",
+            navbarUser: req.session.user
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server Error");
+    }
+});
+
 module.exports = router;
